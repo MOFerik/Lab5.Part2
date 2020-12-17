@@ -5,7 +5,7 @@ using namespace std;
 class Base
 {
 public: int baseCheck = 0;
-	Base() 
+	Base() // Конструкторы базового класса
 	{
 		cout << "Base-class object created. Constructor: Base()\n";
 	};
@@ -20,12 +20,12 @@ public: int baseCheck = 0;
 		cout << "Base-class object created. Constructor: Base(Base& obj)\n";
 	};
 
-	virtual string classname()
+	virtual string classname() // Виртуальный метод получения названия класса объекта
 	{
 		return "Base";
 	}
 
-	virtual bool isA(string clsname)
+	virtual bool isA(string clsname) // Виртуальный метод проверки принадлежности объекта классу
 	{
 		if (classname() == clsname) 
 		{
@@ -38,7 +38,7 @@ public: int baseCheck = 0;
 		}
 	}
 
-	~Base() 
+	~Base() // Деструктор базового класса
 	{
 		cout << "Base-class object destroyed.\n";
 	};
@@ -47,7 +47,7 @@ public: int baseCheck = 0;
 class Desc : public Base
 {
 	public:
-	Desc()
+	Desc() // Конструкторы класса-наследника
 	{
 		cout << "Desc-class object created. Contructor: Desc()\n";
 	};
@@ -62,12 +62,12 @@ class Desc : public Base
 		cout << "Desc-class object created. Contructor: Desc(Desc& obj)\n";
 	};
 
-	string classname()
+	string classname() // Перекрытый метод получения названия класса
 	{
 		return "Desc";
 	}
 
-	bool isA(string clsname)
+	bool isA(string clsname) // Перекрытый метод проверки принадлежности обхекта классу
 	{
 		if (classname() == clsname)
 		{
@@ -80,31 +80,31 @@ class Desc : public Base
 		}
 	}
 
-	~Desc()
+	~Desc() // Деструктор наследника
 	{
 		cout << "Desc-class object destroyed.\n";
 	};
 };
 
-void func1(Base obj) 
+void func1(Base obj)  // Копирующая функция
 {
 	obj.baseCheck++;
 	cout << "Function func1(Base obj) called. obj.baseCheck value: " << obj.baseCheck << "\n";
 };
 
-void func2(Base* obj) 
+void func2(Base* obj) // Функция принимающая ссылку
 {
 	obj->baseCheck++;
 	cout << "Function func2(Base* obj) called. obj->baseCheck value: " << obj->baseCheck << "\n";
 };
 
-void func3(Base& obj) 
+void func3(Base& obj) // Функция принимающая адрес
 {
 	obj.baseCheck++;
 	cout << "Function func3(Base& obj) called. obj.baseCheck value: " << obj.baseCheck << "\n";
 };
 
-void base1Ops()
+void base1Ops() // Создание объекта класса Base и передача его параметром в фукции
 {
 	cout << "Creating Base-class object base1, via constructor Base():\n";
 	Base base1;
@@ -117,7 +117,7 @@ void base1Ops()
 	cout << "\nDestroying base1:\n";
 }
 
-void desc1Ops()
+void desc1Ops() // Создание объекта класса Desc и передача его параметром в фукции
 {
 	cout << "\n\nCreating Desc-class object desc1, via constructor Desc():\n";
 	Desc desc1;
@@ -130,7 +130,7 @@ void desc1Ops()
 	cout << "\nDestroying desc1:\n";
 }
 
-void funcDynamicCast()
+void funcDynamicCast() // Приведение static_cast
 {
 	cout << "\n\nCreating Desc-class Object desc2:\n";
 	Desc* desc2 = new Desc;
@@ -142,7 +142,7 @@ void funcDynamicCast()
 	base2->isA("Desc");
 }
 
-void funcManualCast()
+void funcManualCast() // Приведение вручную
 {
 	cout << "\n\nCreating Desc-class Object desc3:\n";
 	Desc* desc3 = new Desc;
